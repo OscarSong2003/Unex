@@ -5,13 +5,18 @@ import PageLayout from "../standard/PageLayout";
 import NavBar from "../standard/NavBar";
 import AmountInput from "./formComponents/AmountInput";
 import DatePicker from "react-date-picker";
+import api from "../utils/api";
 
-const SpendCategory = (): React.ReactElement => {
+type SpendCategoryProps = {
+    onCatChange : (cat: string) => void;
+}
+
+const SpendCategory = ({ onCatChange } : SpendCategoryProps): React.ReactElement => {
     return (
         <FormControl isRequired my={4}>
                         <Divider orientation='horizontal' my={5} />
                         <FormLabel as="legend" mb={4}>Spending Category</FormLabel>
-                        <RadioGroup defaultValue="tuition">
+                        <RadioGroup defaultValue="tuition" onChange={(val: string) => onCatChange(val)}>
                             <HStack spacing="30px">
                                 <Radio value="tuition">Tuition</Radio>
                                 <Radio value="grocery">Grocery</Radio>
@@ -27,6 +32,28 @@ const SpendCategory = (): React.ReactElement => {
 
 const AddExpense = (): React.ReactElement => { 
     const [date, setDate] = useState(new Date());
+    const [amount, setAmount] = useState(0);
+    const [category, setCategory] = useState("");
+
+    const onAmountChange = (amount: number) => {
+        setAmount(amount);
+    };
+
+    const onCategoryChange = (cat: string) => {
+        setCategory(cat);
+    };
+
+    const sendExpense = async () => {
+        const expense = {
+            date: date,
+            amount: amount,
+            category: category
+        };
+        api.post("/add/expense", expense)
+        .then(res => { console.log(res) })
+        .catch(err => { console.log(err) });
+    };
+
     return (
         <PageLayout> 
             <NavBar />
@@ -50,8 +77,8 @@ const AddExpense = (): React.ReactElement => {
                     textAlign="center"
                     >
                     <Heading as="h5" size="lg">Add Expenditure</Heading>
-                    <SpendCategory />
-                    <AmountInput />
+                    <SpendCategory onCatChange={onCategoryChange} />
+                    <AmountInput onAmountChange={onAmountChange}/>
                     <SimpleGrid columns={2} spacing={4} pt={4} mb={5} 
                      alignItems="left"
                      textAlign="left">

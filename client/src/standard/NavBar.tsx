@@ -1,5 +1,7 @@
 import React from "react";
 import { Navbar, Container, Nav } from "react-bootstrap";
+import { useAuth0 } from "@auth0/auth0-react";
+
 const NavBar = (): React.ReactElement => {
     return (
         <Navbar bg="light" variant="light">

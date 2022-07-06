@@ -9,11 +9,15 @@ import {
     NumberDecrementStepper, 
 } from "@chakra-ui/react";
 
-const AmountInput = (): React.ReactElement => {
+type AmountInputProps = {
+    onAmountChange: (amount: number) => void;
+};
+
+const AmountInput = ({onAmountChange} : AmountInputProps): React.ReactElement => {
     return (
         <FormControl isRequired mt={5}>
                         <FormLabel htmlFor='amount'>Amount ($)</FormLabel>
-                        <NumberInput max={10000000} min={0.01}>
+                        <NumberInput onChange={(_:string, val: number) => onAmountChange(val)} max={10000000} min={0.01}>
                             <NumberInputField id='amount' />
                             <NumberInputStepper>
                             <NumberIncrementStepper />

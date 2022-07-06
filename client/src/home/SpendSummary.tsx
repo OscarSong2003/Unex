@@ -1,9 +1,37 @@
 import { Box, Heading, Text, VStack } from "@chakra-ui/react";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Container } from '@chakra-ui/react'
 import { PieChart } from 'react-minimal-pie-chart';
+import axios from 'axios';
+import { SERVER_URL } from "../utils/secrets";
+import api from "../utils/api";
 
-const SpendSummary = (): React.ReactElement => {
+type SpendSummaryProp = {
+    userEmail: string | undefined
+}
+
+const SpendSummary = ({ userEmail }: SpendSummaryProp): React.ReactElement => {
+    const [ amountAvailable, setAmountAvailable ] = useState(null);
+    const [ amountSpent, setAmountSpent ] = useState(null);
+    
+    useEffect (() => {
+         // get summary info
+        getOverview();
+    }); 
+     
+    const getOverview = () => {
+        if (userEmail) {
+            api.get(`/user/overview`, {params: { email: userEmail }})
+            .then((res:any) => { 
+                const body = res.data; 
+                console.log(body);
+                console.log(res.data.amountAvailable);
+                setAmountAvailable(res.data.amountAvailable);
+                setAmountSpent(res.data.amountSpent);
+             })
+            .catch((err:Error) => { console.log(err) })
+        } 
+    }
     return ( 
         <VStack
             width="80%"
@@ -22,8 +50,8 @@ const SpendSummary = (): React.ReactElement => {
                 <Heading as="h3" size="md"> 
                     Total Summary
                 </Heading>
-                <Text pt={3} fontSize="xl">Amount Available: $3000</Text>
-                <Text py={2} fontSize="xl">Amount Spent: $1000</Text>
+                <Text pt={3} fontSize="xl">Amount Available: ${amountAvailable}</Text>
+                <Text py={2} fontSize="xl">Amount Spent: ${amountSpent}</Text>
             </Box>
             <Box
                 alignContent="center"
