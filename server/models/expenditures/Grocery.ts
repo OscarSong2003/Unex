@@ -10,7 +10,8 @@ import { GroceryExpDTO } from "../../types/GroceryExp";
 // export const GroceryEntry = db.model<GroceryEntryDTO>("GroceryEntry", GroceryEntrySchema);
 
 const GroceryExpenditureSchema = new Schema<GroceryExpDTO>({
-    total: {type: Number, default: 0},
+    _id: Schema.Types.ObjectId,
+    total: {type: Number, default: 0, required: true},
     groceryEntries: [{type: Schema.Types.ObjectId, ref: "ExpenditureEntry"}]
 });
 

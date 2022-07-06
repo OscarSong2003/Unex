@@ -10,7 +10,8 @@ import { OtherExpDTO } from "../../types/OtherExp";
 // export const OtherEntry = db.model<OtherExpEntryDTO>("OtherExpEntry", OtherExpEntrySchema);
 
 const OtherExpenditureSchema = new Schema<OtherExpDTO>({
-    total: {type: Number, default: 0},
+    _id: Schema.Types.ObjectId,
+    total: {type: Number, default: 0, required: true},
     otherEntries: [{type: Schema.Types.ObjectId, ref: "ExpenditureEntry"}]
 });
 

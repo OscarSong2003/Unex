@@ -10,7 +10,8 @@ import { TechExpDTO } from "../../types/TechExp";
 // export const TechEntry = db.model<TechEntryDTO>("TechEntry", TechEntrySchema);
 
 const TechExpenditureSchema = new Schema<TechExpDTO>({
-    total: {type: Number, default: 0},
+    _id: Schema.Types.ObjectId,
+    total: {type: Number, default: 0, required: true},
     techEntries: [{type: Schema.Types.ObjectId, ref: "ExpenditureEntry"}]
 });
 

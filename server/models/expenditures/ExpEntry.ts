@@ -3,7 +3,8 @@ import { Schema } from "mongoose";
 import { ExpEntryDTO } from "../../types/ExpEntry";
 
 const ExpenditureEntrySchema = new Schema<ExpEntryDTO>({ 
-    amount: {type: Number, required: true},
+    _id: Schema.Types.ObjectId,
+    amount: {type: Number, required: true, default: 0},
     date: {type: Date, required: false}
 });
 

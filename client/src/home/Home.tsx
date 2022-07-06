@@ -14,14 +14,13 @@ import api from "../utils/api";
 const Home = (): React.ReactElement => {
     const { isLoading, user, isAuthenticated } = useAuth0();
     // const [ userExists, setUserExists ] = useState(false);
-
     useEffect(() => {
         if (isAuthenticated && user && user.email) {
-            api.post(`/user/check`, {email: user?.email})
+            api.post("/user/check", {email: user?.email})
             .then((res:any) => { console.log(res); })
             .catch((err:Error) => { console.log(err) })
         } 
-    }, []); 
+    }); 
 
     if (!isLoading && !isAuthenticated) {
         return ( <UserAlert message={"You need to be logged in to view this resource!"} isNotLoggedIn={true}/> );

@@ -10,7 +10,8 @@ import { FunExpDTO } from "../../types/FunExp";
 // export const FunEntry = db.model<FunEntryDTO>("FunEntry", FunEntrySchema);
 
 const FunExpenditureSchema = new Schema<FunExpDTO>({
-    total: {type: Number, default: 0},
+    _id: Schema.Types.ObjectId,
+    total: {type: Number, default: 0, required: true},
     funEntries: [{type: Schema.Types.ObjectId, ref: "ExpenditureEntry"}]
 });
 

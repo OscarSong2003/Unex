@@ -1,4 +1,4 @@
-import { ObjectId } from "mongoose"
+import { ObjectId, Schema } from "mongoose"
 
 // export type OtherExpEntryDTO = {
 //     amount: number,
@@ -6,6 +6,7 @@ import { ObjectId } from "mongoose"
 // }
 
 export type OtherExpDTO = {
+    _id: Schema.Types.ObjectId,
     total: number,
     otherEntries: [ObjectId]
 }

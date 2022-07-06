@@ -1,4 +1,4 @@
-import { ObjectId } from "mongoose"
+import { ObjectId, Schema } from "mongoose"
 
 // export type GroceryEntryDTO = {
 //     amount: number,
@@ -6,6 +6,7 @@ import { ObjectId } from "mongoose"
 // }
 
 export type GroceryExpDTO = {
+    _id: Schema.Types.ObjectId,
     total: number,
     groceryEntries: [ObjectId]
 }

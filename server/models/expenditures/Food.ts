@@ -4,7 +4,8 @@ import { FoodExpDTO } from "../../types/FoodExp";
 
 
 const FoodExpenditureSchema = new Schema<FoodExpDTO>({
-    total: {type: Number, default: 0},
+    _id: Schema.Types.ObjectId,
+    total: {type: Number, default: 0, required: true},
     foodEntries: [{type: Schema.Types.ObjectId, ref: "ExpenditureEntry"}]
 });
 

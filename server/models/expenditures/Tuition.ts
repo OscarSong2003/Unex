@@ -10,11 +10,12 @@ import { TuitionExpDTO } from "../../types/TuitionExp";
 // export const TuitionEntry = db.model<TuitionEntryDTO>("TuitionEntry", TuitionEntrySchema);
 
 const TuitionExpenditureSchema = new Schema<TuitionExpDTO>({
-    total: {type: Number, default: 0},
+    _id: Schema.Types.ObjectId,
+    total: {type: Number, default: 0, required: true},
     tuitionEntries: [{type: Schema.Types.ObjectId, ref: "ExpenditureEntry"}]
 });
 
-export const TutionExpenditure = db.model<TuitionExpDTO>("TuitionExpenditure", TuitionExpenditureSchema);
+export const TuitionExpenditure = db.model<TuitionExpDTO>("TuitionExpenditure", TuitionExpenditureSchema);
 
 // export type TuitionDTO = {
 //     total: number,
