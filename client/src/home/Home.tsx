@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Box, Button, Flex, HStack, Image, Text } from "@chakra-ui/react";
 import PageLayout from "../standard/PageLayout";
 import NavBar from "../standard/NavBar";
@@ -6,8 +6,28 @@ import SpendSummary from "./SpendSummary";
 import { Container, SimpleGrid, Spacer } from "@chakra-ui/react";
 import CategorySummary from "./CategorySummary";
 import ActionCenter from "./ActionCenter";
+import { useAuth0 } from "@auth0/auth0-react";
+import { SERVER_URL } from "../utils/secrets"
+import UserAlert from "../standard/Alert";
+import api from "../utils/api";
 
 const Home = (): React.ReactElement => {
+    const { isLoading, user, isAuthenticated } = useAuth0();
+    // const [ userExists, setUserExists ] = useState(false);
+
+    useEffect(() => {
+        if (isAuthenticated && user && user.email) {
+            api.post(`/user/check`, {email: user?.email})
+            .then((res:any) => { console.log(res); })
+            .catch((err:Error) => { console.log(err) })
+        } 
+    }, []); 
+
+    if (!isLoading && !isAuthenticated) {
+        return ( <UserAlert message={"You need to be logged in to view this resource!"} isNotLoggedIn={true}/> );
+    }
+    
+    // fetch current user's data from API
     return (
         <PageLayout>
             <NavBar />
@@ -23,33 +43,12 @@ const Home = (): React.ReactElement => {
                   ml="20px"
                   mr="30px"> 
                   
-                {/* <SimpleGrid columns={3} spacing={4} pt={4}> */}
-               
-            {/* <HStack > */}
                 <ActionCenter />
                 <Spacer />
-                <SpendSummary />
+                <SpendSummary userEmail={user?.email}/>
                 <Spacer />
                 <CategorySummary />
-            {/* </HStack> */}
-                    
-                    
             </Flex>
-                
-                {/* </SimpleGrid> */}
-        
-            
-
-
-            {/* <Flex 
-                direction="column"
-                alignItems="center"
-                justifyContent="center" 
-                justify="center"
-                w="100%"
-            >
-                
-            </Flex> */}
         </PageLayout>
     )
 }

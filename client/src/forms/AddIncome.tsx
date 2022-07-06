@@ -39,6 +39,11 @@ import {
 
 const AddIncome = (): React.ReactElement => {
     const [date, setDate] = useState(new Date());
+    const [amount, setAmount] = useState(0);
+
+    const onAmountChange = (amount: number) => {
+        setAmount(amount);
+    }
     return (
         <PageLayout>
             <NavBar />
@@ -63,7 +68,7 @@ const AddIncome = (): React.ReactElement => {
                     >
                     <Heading as="h5" size="lg">Add Income/Additional Funds</Heading>
                     <IncomeCategory />
-                    <AmountInput />
+                    <AmountInput onAmountChange={onAmountChange}/>
                     <SimpleGrid columns={2} spacing={4} pt={4} mb={5} 
                      alignItems="left"
                      textAlign="left">

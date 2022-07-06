@@ -1,6 +1,6 @@
 import React from 'react';
 import { Box, Heading, VStack, Button, Spacer, Link } from "@chakra-ui/react";
-
+import LogoutButton from '../standard/Logout';
 const ActionCenter = (): React.ReactElement => {
     return (
         <Box bg="gray.100"
@@ -11,7 +11,7 @@ const ActionCenter = (): React.ReactElement => {
             py={7}
             px={5}
             ml="150px"
-            height="50%"
+            height="56%"
         >
             <Heading as="h3" size="md">Action Center</Heading>
             <VStack mt={6}>
@@ -24,6 +24,8 @@ const ActionCenter = (): React.ReactElement => {
                 </Link>
                 <Spacer />
                 <Button mx={5} colorScheme="facebook">View Monthly Summary</Button>
+                <Spacer />
+                <LogoutButton />
             </VStack>
         </Box>
     )

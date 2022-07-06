@@ -22,7 +22,6 @@ import { Button, ButtonGroup } from '@chakra-ui/react'
 
 const CategorySummary = (): React.ReactElement => {
     return (
-        
             <Box
             bg="gray.100"
             borderColor="gray.100"

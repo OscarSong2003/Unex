@@ -18,29 +18,43 @@ import mongoose from 'mongoose';
 
 const { MongoClient, ServerApiVersion } = require('mongodb');
 const uri = "mongodb+srv://user1:user1@unex.dbjmtzd.mongodb.net/?retryWrites=true&w=majority";
+const userRoute = require('./routes/users');
+const addRoute = require('./routes/add');
 
 const start = async () => {
   try {
     await mongoose.connect(uri);
+    console.log('connected to mongodb');
   } catch (err: any) {
     console.log("error connecting to mongodb", err);
   }
   // basic configs
   const app = express();
+  app.set('views', path.join(__dirname, 'views'));
+  app.set('view engine', 'jade');
   app.use(logger('dev'));
   app.use(express.json());
   app.use(express.urlencoded({ extended: false }));
   app.use(cookieParser());
   app.use(express.static(path.join(__dirname, 'public')));
+
   // Cors
   app.use(cors());
+  // routes
+  app.use('/user', userRoute);
+  app.use('/add', addRoute);
 
   app.get('/', (req: Request, res: Response, next: NextFunction) => {
     res.send('Hello World!'); 
   })
 
-  // catch 404 and forward to error handler
-  app.use(function(req: Request, res: Response, next: NextFunction) {
+  const httpServer = createServer(app);
+
+  httpServer.listen(PORT, () => {
+    console.log(`Server is running on port ${PORT}`);
+  } );
+   // catch 404 and forward to error handler
+   app.use(function(req: Request, res: Response, next: NextFunction) {
     next(createError(404));
   });
 
@@ -54,12 +68,6 @@ const start = async () => {
     res.status(err.status || 500);
     res.render('error');
   });
-
-  const httpServer = createServer(app);
-
-  httpServer.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}`);
-  } );
 }
 
 start();
