@@ -3,6 +3,7 @@ import { UserDTO } from "../types/User";
 import db from "../db";
 
 const UserSchema = new Schema<UserDTO>({
+    _id: Schema.Types.ObjectId,
     email: {type: String, required: true},
     amountAvailable: {type: Number, default: 0},
     amountSpent: {type: Number, default: 0},

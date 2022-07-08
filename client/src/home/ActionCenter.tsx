@@ -1,7 +1,13 @@
 import React from 'react';
 import { Box, Heading, VStack, Button, Spacer, Link } from "@chakra-ui/react";
 import LogoutButton from '../standard/Logout';
-const ActionCenter = (): React.ReactElement => {
+
+type ActionCenterProps = {
+    onAddExpense: () => void;
+    onAddIncome: () => void;
+}
+
+const ActionCenter = ({ onAddExpense, onAddIncome }: ActionCenterProps): React.ReactElement => {
     return (
         <Box bg="gray.100"
             borderColor="gray.100"
@@ -15,13 +21,9 @@ const ActionCenter = (): React.ReactElement => {
         >
             <Heading as="h3" size="md">Action Center</Heading>
             <VStack mt={6}>
-                <Link href="/addExp"> 
-                    <Button py={5} colorScheme="red">Add Expense</Button>
-                </Link>
+                <Button onClick={() => onAddExpense()} py={5} colorScheme="red">Add Expense</Button>
                 <Spacer />
-                <Link href="/addInc"> 
-                    <Button mx={5} colorScheme="green">Add Earning/Income</Button>
-                </Link>
+                <Button mx={5} onClick={() => onAddIncome} colorScheme="green">Add Earning/Income</Button>
                 <Spacer />
                 <Button mx={5} colorScheme="facebook">View Monthly Summary</Button>
                 <Spacer />

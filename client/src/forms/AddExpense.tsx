@@ -8,7 +8,7 @@ import DatePicker from "react-date-picker";
 import api from "../utils/api";
 
 type SpendCategoryProps = {
-    onCatChange : (cat: string) => void;
+    onCatChange : (val: string) => void;
 }
 
 const SpendCategory = ({ onCatChange } : SpendCategoryProps): React.ReactElement => {
@@ -30,23 +30,28 @@ const SpendCategory = ({ onCatChange } : SpendCategoryProps): React.ReactElement
     )
 }
 
-const AddExpense = (): React.ReactElement => { 
+type AddExpenseProps = {
+    userEmail: string
+}
+
+const AddExpense = ({ userEmail } : AddExpenseProps): React.ReactElement => { 
     const [date, setDate] = useState(new Date());
     const [amount, setAmount] = useState(0);
     const [category, setCategory] = useState("");
-
+    
     const onAmountChange = (amount: number) => {
         setAmount(amount);
     };
 
-    const onCategoryChange = (cat: string) => {
-        setCategory(cat);
+    const onCategoryChange = (val: string) => {
+        setCategory(val);
     };
 
     const sendExpense = async () => {
         const expense = {
+            email: userEmail,
             date: date,
-            amount: amount,
+            amount: amount, 
             category: category
         };
         api.post("/add/expense", expense)
@@ -90,7 +95,9 @@ const AddExpense = (): React.ReactElement => {
                             <Button colorScheme="red">Discard and Return</Button> 
                         </Link>
                         <Spacer />  
-                        <Button colorScheme="green">Add Expense</Button> 
+                        <Link href="/home"> 
+                            <Button colorScheme="green" onClick={() => sendExpense()}>Add Expense</Button>
+                        </Link> 
                     </Flex>
                     
                 </Box> 

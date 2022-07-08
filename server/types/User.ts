@@ -10,8 +10,10 @@ import { JobIncDTO } from "./Income/Job"
 import { FriendIncDTO } from "./Income/Friend"
 import { ScholarshipIncDTO } from "./Income/Scholarship"
 import { OtherIncDTO } from "./Income/Other"
+import { Schema } from "mongoose"
 
 export type UserDTO = {
+    _id: Schema.Types.ObjectId,
     email: string, 
     amountAvailable: number,
     amountSpent: number, 

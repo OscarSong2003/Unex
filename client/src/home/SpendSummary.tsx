@@ -50,8 +50,8 @@ const SpendSummary = ({ userEmail }: SpendSummaryProp): React.ReactElement => {
                 <Heading as="h3" size="md"> 
                     Total Summary
                 </Heading>
-                <Text pt={3} fontSize="xl">Amount Available: ${amountAvailable}</Text>
-                <Text py={2} fontSize="xl">Amount Spent: ${amountSpent}</Text>
+                <Text pt={3} fontSize="xl">Amount Available: ${amountAvailable ? parseFloat(amountAvailable).toFixed(2) : amountAvailable}</Text>
+                <Text py={2} fontSize="xl">Amount Spent: ${amountSpent ? parseFloat(amountSpent).toFixed(2) : amountSpent}</Text>
             </Box>
             <Box
                 alignContent="center"
