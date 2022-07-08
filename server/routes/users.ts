@@ -60,6 +60,7 @@ router.post('/check', async function(req: Request, res: Response, next: NextFunc
     await otherInc.save();
 
     const user = new User({
+      _id: new mongoose.Types.ObjectId(),
       email: userEmail,
       tuitionExp: tuition._id,
       groceryExp: grocery._id,
@@ -79,7 +80,7 @@ router.post('/check', async function(req: Request, res: Response, next: NextFunc
         console.log(err);
       } else {
         console.log("user created");
-        res.send('created');
+        res.send({_id: createdUser._id});
       }
     })
   }

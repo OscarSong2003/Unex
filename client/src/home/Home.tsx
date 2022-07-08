@@ -6,18 +6,23 @@ import SpendSummary from "./SpendSummary";
 import { Container, SimpleGrid, Spacer } from "@chakra-ui/react";
 import CategorySummary from "./CategorySummary";
 import ActionCenter from "./ActionCenter";
+import AccountSummary from "./AccountSummary";
 import { useAuth0 } from "@auth0/auth0-react";
 import { SERVER_URL } from "../utils/secrets"
 import UserAlert from "../standard/Alert";
 import api from "../utils/api";
+import { PageState } from "../types/PageState";
+import AddExpense from "../forms/AddExpense";
 
 const Home = (): React.ReactElement => {
     const { isLoading, user, isAuthenticated } = useAuth0();
-    // const [ userExists, setUserExists ] = useState(false);
+    const [ pageState, setPageState ] = useState(PageState.HOME); 
+    const [ userId, setUserId ] = useState(null);
+
     useEffect(() => {
         if (isAuthenticated && user && user.email) {
             api.post("/user/check", {email: user?.email})
-            .then((res:any) => { console.log(res); })
+            .then((res:any) => { console.log(res); setUserId(res.data._id) })
             .catch((err:Error) => { console.log(err) })
         } 
     }); 
@@ -26,30 +31,26 @@ const Home = (): React.ReactElement => {
         return ( <UserAlert message={"You need to be logged in to view this resource!"} isNotLoggedIn={true}/> );
     }
     
+    const onAddExpense = () => { setPageState(PageState.ADD_EXPENSE) };
+    const onAddIncome = () => { setPageState(PageState.ADD_INCOME) };
+
+    if (user && user.email) {
+        switch(pageState) {
+            case PageState.HOME: {
+                return (<AccountSummary userEmail={user.email} onAddExpense={onAddExpense} onAddIncome={onAddIncome} />);
+            }
+            case PageState.ADD_EXPENSE: {
+                return (<AddExpense userEmail={user.email} />);
+            }
+            default: {
+                return (<UserAlert message={"You need to be logged in to view this resource!"} isNotLoggedIn={true}/>);
+            }
+        }
+    } else {
+        return ( <UserAlert message={"You need to be logged in to view this resource!"} isNotLoggedIn={true}/> );
+    }
     // fetch current user's data from API
-    return (
-        <PageLayout>
-            <NavBar />
-            <Flex w="80%%"
-                  h="600px"
-                  direction="row"
-                  alignItems="top"
-                  justifyContent="center"
-                  mt="150px"
-                  bg="gray.300"
-                  borderColor="gray.100"
-                  pt="50px"
-                  ml="20px"
-                  mr="30px"> 
-                  
-                <ActionCenter />
-                <Spacer />
-                <SpendSummary userEmail={user?.email}/>
-                <Spacer />
-                <CategorySummary />
-            </Flex>
-        </PageLayout>
-    )
+   
 }
 
 export default Home; 
