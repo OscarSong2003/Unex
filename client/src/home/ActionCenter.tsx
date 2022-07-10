@@ -23,7 +23,7 @@ const ActionCenter = ({ onAddExpense, onAddIncome }: ActionCenterProps): React.R
             <VStack mt={6}>
                 <Button onClick={() => onAddExpense()} py={5} colorScheme="red">Add Expense</Button>
                 <Spacer />
-                <Button mx={5} onClick={() => onAddIncome} colorScheme="green">Add Earning/Income</Button>
+                <Button mx={5} onClick={() => onAddIncome()} colorScheme="green">Add Earning/Income</Button>
                 <Spacer />
                 <Button mx={5} colorScheme="facebook">View Monthly Summary</Button>
                 <Spacer />

@@ -31,7 +31,7 @@ const AccountSummary = ({ userEmail, onAddExpense, onAddIncome } : AccountSummar
                 <Spacer />
                 <SpendSummary userEmail={userEmail}/>
                 <Spacer />
-                <CategorySummary />
+                <CategorySummary userEmail={userEmail} />
             </Flex>
         </PageLayout>
     )
