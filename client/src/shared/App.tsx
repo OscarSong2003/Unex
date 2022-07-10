@@ -18,7 +18,7 @@ const App = (): React.ReactElement => {
             <Route path="/" element={<Lobby />} />
             <Route path="/home" element={<Home />} />
             {/* <Route path="/addExp" element={<AddExpense />} /> */}
-            <Route path="/addInc" element={<AddIncome />} />
+            {/* <Route path="/addInc" element={<AddIncome />} /> */}
             {/* <Route path="/draw" element={<Drawpad />} />
             <Route path="/profile" element={<Profile />} />
             <Route path="/test" element={<Test />} />

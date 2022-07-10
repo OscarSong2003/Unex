@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Box, Button, Flex, HStack, Image, Text } from "@chakra-ui/react";
+import { Box, Button, Flex, HStack, Image, Text, Center, Spinner } from "@chakra-ui/react";
 import PageLayout from "../standard/PageLayout";
 import NavBar from "../standard/NavBar";
 import SpendSummary from "./SpendSummary";
@@ -13,18 +13,22 @@ import UserAlert from "../standard/Alert";
 import api from "../utils/api";
 import { PageState } from "../types/PageState";
 import AddExpense from "../forms/AddExpense";
+import AddIncome from "../forms/AddIncome";
+
 
 const Home = (): React.ReactElement => {
     const { isLoading, user, isAuthenticated } = useAuth0();
     const [ pageState, setPageState ] = useState(PageState.HOME); 
-    const [ userId, setUserId ] = useState(null);
+    const [ userFetched, setUserFetched ] = useState(false);
 
     useEffect(() => {
-        if (isAuthenticated && user && user.email) {
-            api.post("/user/check", {email: user?.email})
-            .then((res:any) => { console.log(res); setUserId(res.data._id) })
-            .catch((err:Error) => { console.log(err) })
-        } 
+        const checkUser = async () => {
+            if (isAuthenticated && user && user.email) {
+                await api.post("/user/check", {email: user?.email})
+                setUserFetched(true);
+            } 
+        }
+        checkUser(); 
     }); 
 
     if (!isLoading && !isAuthenticated) {
@@ -34,7 +38,7 @@ const Home = (): React.ReactElement => {
     const onAddExpense = () => { setPageState(PageState.ADD_EXPENSE) };
     const onAddIncome = () => { setPageState(PageState.ADD_INCOME) };
 
-    if (user && user.email) {
+    if (userFetched && user && user.email) {
         switch(pageState) {
             case PageState.HOME: {
                 return (<AccountSummary userEmail={user.email} onAddExpense={onAddExpense} onAddIncome={onAddIncome} />);
@@ -42,12 +46,39 @@ const Home = (): React.ReactElement => {
             case PageState.ADD_EXPENSE: {
                 return (<AddExpense userEmail={user.email} />);
             }
+            case PageState.ADD_INCOME: {
+                return (<AddIncome userEmail={user.email} />);
+            }
             default: {
                 return (<UserAlert message={"You need to be logged in to view this resource!"} isNotLoggedIn={true}/>);
             }
         }
     } else {
-        return ( <UserAlert message={"You need to be logged in to view this resource!"} isNotLoggedIn={true}/> );
+        return (
+            <PageLayout>
+            <Flex w="100%"
+                  h="100vh"
+                  direction="row"
+                  alignItems="center"
+                  justifyContent="center"
+                >
+                <Spinner
+                    thickness='4px'
+                    speed='0.65s'
+                    emptyColor='gray.200'
+                    color='blue.500'
+                    size='xl'
+                    mr={4}
+                />
+                <Image 
+                    width={850}
+                    src="/images/loadingProf.png"
+                    alt="loading profile"
+                    mb={8}
+                />
+                </Flex>
+            </PageLayout>
+        );
     }
     // fetch current user's data from API
    

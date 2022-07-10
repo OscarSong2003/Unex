@@ -18,32 +18,58 @@ import {
  } from "@chakra-ui/react";
  import AmountInput from "./formComponents/AmountInput";
  import DatePicker from "react-date-picker";
+ import api from "../utils/api";
 
- const IncomeCategory = (): React.ReactElement => {
+ type IncomeCategoryProps = {
+    onIncChange: (val: string) => void
+ }
+
+ const IncomeCategory = ({ onIncChange } : IncomeCategoryProps): React.ReactElement => {
     return (
         <FormControl isRequired my={4}>
                         <Divider orientation='horizontal' my={5} />
                         <FormLabel as="legend" mb={4}>Income/Earning Category</FormLabel>
-                        <RadioGroup defaultValue="family">
+                        <RadioGroup onChange={(val: string) => onIncChange(val)}>
                             <HStack spacing="30px">
                                 <Radio value="family">Family</Radio>
                                 <Radio value="job">Job</Radio>
-                                <Radio value="friends">Friends</Radio>
-                                <Radio value="loan">Loans/Scholarships</Radio> 
+                                <Radio value="friend">Friends</Radio>
+                                <Radio value="scholarship">Loans/Scholarships</Radio> 
                                 <Radio value="other">Other</Radio>
                             </HStack>
                         </RadioGroup>
-                    </FormControl>
+        </FormControl>
     )
 }
 
-const AddIncome = (): React.ReactElement => {
+type AddIncomeProps = {
+    userEmail: string;
+}
+
+const AddIncome = ({ userEmail } : AddIncomeProps): React.ReactElement => {
     const [date, setDate] = useState(new Date());
     const [amount, setAmount] = useState(0);
+    const [category, setCategory] = useState("");
 
     const onAmountChange = (amount: number) => {
         setAmount(amount);
     }
+    const onCategoryChange = (val: string) => {
+        setCategory(val);
+    };
+
+    const sendIncome = async () => {
+        const income = {
+            email: userEmail,
+            date: date,
+            amount: amount, 
+            category: category
+        };
+        api.post("/add/income", income)
+        .then(res => { console.log(res) })
+        .catch(err => { console.log(err) });
+    };
+
     return (
         <PageLayout>
             <NavBar />
@@ -67,7 +93,7 @@ const AddIncome = (): React.ReactElement => {
                     textAlign="center"
                     >
                     <Heading as="h5" size="lg">Add Income/Additional Funds</Heading>
-                    <IncomeCategory />
+                    <IncomeCategory onIncChange={onCategoryChange}/>
                     <AmountInput onAmountChange={onAmountChange}/>
                     <SimpleGrid columns={2} spacing={4} pt={4} mb={5} 
                      alignItems="left"
@@ -80,7 +106,7 @@ const AddIncome = (): React.ReactElement => {
                             <Button colorScheme="red">Discard and Return</Button> 
                         </Link>
                         <Spacer />  
-                        <Button colorScheme="green">Add Funds</Button> 
+                        <Button colorScheme="green" onClick={sendIncome}>Add Funds</Button> 
                     </Flex>
                 </Box>
 

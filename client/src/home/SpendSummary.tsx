@@ -59,10 +59,10 @@ const SpendSummary = ({ userEmail }: SpendSummaryProp): React.ReactElement => {
                 pt={5}
             >
                 <PieChart 
+                    // totalValue={}
                     data={[
-                        { title: 'One', value: 10, color: '#E38627' },
-                        { title: 'Two', value: 15, color: '#C13C37' },
-                        { title: 'Three', value: 20, color: '#6A2135' },
+                        { title: 'Two', value: amountAvailable ? amountAvailable : 0, color: '#C13C37' },
+                        { title: 'One', value: amountSpent ? amountSpent : 0, color: '#E38627' },
                     ]}
                     />
             </Box>

@@ -16,7 +16,7 @@ const SpendCategory = ({ onCatChange } : SpendCategoryProps): React.ReactElement
         <FormControl isRequired my={4}>
                         <Divider orientation='horizontal' my={5} />
                         <FormLabel as="legend" mb={4}>Spending Category</FormLabel>
-                        <RadioGroup defaultValue="tuition" onChange={(val: string) => onCatChange(val)}>
+                        <RadioGroup onChange={(val: string) => onCatChange(val)}>
                             <HStack spacing="30px">
                                 <Radio value="tuition">Tuition</Radio>
                                 <Radio value="grocery">Grocery</Radio>
