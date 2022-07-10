@@ -106,7 +106,9 @@ const AddIncome = ({ userEmail } : AddIncomeProps): React.ReactElement => {
                             <Button colorScheme="red">Discard and Return</Button> 
                         </Link>
                         <Spacer />  
-                        <Button colorScheme="green" onClick={sendIncome}>Add Funds</Button> 
+                        <Link href="/home"> 
+                            <Button colorScheme="green" onClick={sendIncome}>Add Funds</Button> 
+                        </Link>
                     </Flex>
                 </Box>
 

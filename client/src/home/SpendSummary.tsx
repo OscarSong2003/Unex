@@ -11,8 +11,10 @@ type SpendSummaryProp = {
 }
 
 const SpendSummary = ({ userEmail }: SpendSummaryProp): React.ReactElement => {
-    const [ amountAvailable, setAmountAvailable ] = useState(null);
-    const [ amountSpent, setAmountSpent ] = useState(null);
+    const [ amountAvailable, setAmountAvailable ] = useState(0);
+    const [ amountSpent, setAmountSpent ] = useState(0);
+    const [ isInDeficit, setIsInDeficit ] = useState(false);
+    const [ deficit, setDeficit ] = useState(0);
     
     useEffect (() => {
          // get summary info
@@ -27,6 +29,12 @@ const SpendSummary = ({ userEmail }: SpendSummaryProp): React.ReactElement => {
                 console.log(body);
                 console.log(res.data.amountAvailable);
                 setAmountAvailable(res.data.amountAvailable);
+                // check if in deiicit
+                if (amountAvailable && amountAvailable < 0) {
+                    // in deficit, so set it to true
+                    setIsInDeficit(true);
+                    setDeficit(amountAvailable * -1);
+                } 
                 setAmountSpent(res.data.amountSpent);
              })
             .catch((err:Error) => { console.log(err) })
@@ -50,19 +58,41 @@ const SpendSummary = ({ userEmail }: SpendSummaryProp): React.ReactElement => {
                 <Heading as="h3" size="md"> 
                     Total Summary
                 </Heading>
-                <Text pt={3} fontSize="xl">Amount Available: ${amountAvailable ? parseFloat(amountAvailable).toFixed(2) : amountAvailable}</Text>
-                <Text py={2} fontSize="xl">Amount Spent: ${amountSpent ? parseFloat(amountSpent).toFixed(2) : amountSpent}</Text>
+                <Text pt={3} fontSize="xl">Amount Available: ${
+                (!isInDeficit) ? amountAvailable.toFixed(2) : 0}</Text>
+                <Text py={2} fontSize="xl">Amount Spent: ${amountSpent ? amountSpent.toFixed(2) : 0}</Text>
+                {isInDeficit && <Text py={2} fontSize="xl" color="red.600">Net Deficit: ${(deficit).toFixed(2) }</Text>}
             </Box>
             <Box
                 alignContent="center"
                 width="50%"
-                pt={5}
+                maxWidth="400px"
             >
                 <PieChart 
-                    // totalValue={}
+                    // animate={true}
+                    // animationDuration={500}
+                    // animationEasing="ease-out"
+                    label={({dataEntry}) => {   
+                        return dataEntry.title;
+                    }}
+                    segmentsStyle={ { 
+                        transition: 'stroke 0.5s ease',
+                        width: '120%',
+                        height: "120%",
+                        strokeWidth: '25px',
+                        
+                    } }
+                    totalValue={isInDeficit ? amountSpent : amountSpent + amountAvailable} 
+                    labelStyle={
+                        {
+                            fontSize: '6px',
+                            fontFamily: "Lucida Console",
+                            textDecoration: 'underline'
+                        }
+                    }
                     data={[
-                        { title: 'Two', value: amountAvailable ? amountAvailable : 0, color: '#C13C37' },
-                        { title: 'One', value: amountSpent ? amountSpent : 0, color: '#E38627' },
+                        { title: isInDeficit ? ' ' : 'Available', value: isInDeficit ? 0 : amountAvailable, color: '#80CD91' },
+                        { title: isInDeficit ? 'Deficit' : 'Spent', value: amountSpent, color: '#F3C18C' },
                     ]}
                     />
             </Box>
