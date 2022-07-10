@@ -8,4 +8,4 @@ const IncomeEntrySchema = new Schema<IncEntryDTO>({
     date: {type: Date, required: false}
 });
 
-export const IncomeEntry = db.model<IncEntryDTO>("ExpenditureEntry", IncomeEntrySchema);
+export const IncomeEntry = db.model<IncEntryDTO>("IncomeEntry", IncomeEntrySchema);
