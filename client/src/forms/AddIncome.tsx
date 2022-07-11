@@ -14,7 +14,8 @@ import {
     HStack,
     SimpleGrid,
     Spacer,
-    Link
+    Link,
+    Input
  } from "@chakra-ui/react";
  import AmountInput from "./formComponents/AmountInput";
  import DatePicker from "react-date-picker";
@@ -27,7 +28,6 @@ import {
  const IncomeCategory = ({ onIncChange } : IncomeCategoryProps): React.ReactElement => {
     return (
         <FormControl isRequired my={4}>
-                        <Divider orientation='horizontal' my={5} />
                         <FormLabel as="legend" mb={4}>Income/Earning Category</FormLabel>
                         <RadioGroup onChange={(val: string) => onIncChange(val)}>
                             <HStack spacing="30px">
@@ -50,6 +50,7 @@ const AddIncome = ({ userEmail } : AddIncomeProps): React.ReactElement => {
     const [date, setDate] = useState(new Date());
     const [amount, setAmount] = useState(0);
     const [category, setCategory] = useState("");
+    const [description, setDescription] = useState("");
 
     const onAmountChange = (amount: number) => {
         setAmount(amount);
@@ -63,7 +64,8 @@ const AddIncome = ({ userEmail } : AddIncomeProps): React.ReactElement => {
             email: userEmail,
             date: date,
             amount: amount, 
-            category: category
+            category: category,
+            name: description
         };
         api.post("/add/income", income)
         .then(res => { console.log(res) })
@@ -93,6 +95,15 @@ const AddIncome = ({ userEmail } : AddIncomeProps): React.ReactElement => {
                     textAlign="center"
                     >
                     <Heading as="h5" size="lg">Add Income/Additional Funds</Heading>
+                    <Divider orientation='horizontal' my={5} />
+                    <FormControl isRequired>
+                        <FormLabel as="legend" mb={4}>Income Name</FormLabel>
+                        <Input
+                            focusBorderColor='red.300'
+                            placeholder='short name/description of income'
+                            onChange={(event: any) => setDescription(event.target.value)}
+                        />
+                    </FormControl>
                     <IncomeCategory onIncChange={onCategoryChange}/>
                     <AmountInput onAmountChange={onAmountChange}/>
                     <SimpleGrid columns={2} spacing={4} pt={4} mb={5} 
