@@ -20,8 +20,8 @@ import { OtherIncome } from "../models/incomes/Other";
 const router = express.Router();
 
 router.post('/income', async function(req: Request, res: Response, next: NextFunction) {
-    const { email, date, amount, category } = req.body;
-    const entry = new IncomeEntry({_id: new mongoose.Types.ObjectId(), amount: amount, date: date});
+    const { email, date, amount, category, name } = req.body;
+    const entry = new IncomeEntry({_id: new mongoose.Types.ObjectId(), name: name, category: category, amount: amount, date: date});
     await entry.save((err: any, createdEntry) => {
         console.log('email', email);
         console.log('date', date);
@@ -77,14 +77,15 @@ router.post('/income', async function(req: Request, res: Response, next: NextFun
 });
 
 router.post('/expense', async function(req: Request, res: Response, next: NextFunction) { 
-    const { email, date, amount, category } = req.body;
-    const entry = new ExpenditureEntry({_id: new mongoose.Types.ObjectId(), amount: amount, date: date});
+    const { email, date, amount, category, name} = req.body;
+    const entry = new ExpenditureEntry({_id: new mongoose.Types.ObjectId(), name: name, category: category, amount: amount, date: date});
     await entry.save((err: any, createdEntry) => {
         // find current user  
         console.log('email', email);
         console.log('date', date);
         console.log('amount', amount);
-        console.log('category: ', category);
+        console.log('category:', category);
+        console.log('name:', name);
         // insert object id into user's expenditure type array
         
         switch (category) {

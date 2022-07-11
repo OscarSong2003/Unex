@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Box, Heading, Flex, Divider, RadioGroup, HStack, FormControl, FormLabel, Radio,
-         SimpleGrid, Button, Spacer, Link} from "@chakra-ui/react"
+         SimpleGrid, Button, Spacer, Link, Input} from "@chakra-ui/react"
 import PageLayout from "../standard/PageLayout";
 import NavBar from "../standard/NavBar";
 import AmountInput from "./formComponents/AmountInput";
@@ -14,7 +14,6 @@ type SpendCategoryProps = {
 const SpendCategory = ({ onCatChange } : SpendCategoryProps): React.ReactElement => {
     return (
         <FormControl isRequired my={4}>
-                        <Divider orientation='horizontal' my={5} />
                         <FormLabel as="legend" mb={4}>Spending Category</FormLabel>
                         <RadioGroup onChange={(val: string) => onCatChange(val)}>
                             <HStack spacing="30px">
@@ -38,6 +37,7 @@ const AddExpense = ({ userEmail } : AddExpenseProps): React.ReactElement => {
     const [date, setDate] = useState(new Date());
     const [amount, setAmount] = useState(0);
     const [category, setCategory] = useState("");
+    const [description, setDescription] = useState("");
     
     const onAmountChange = (amount: number) => {
         setAmount(amount);
@@ -52,7 +52,8 @@ const AddExpense = ({ userEmail } : AddExpenseProps): React.ReactElement => {
             email: userEmail,
             date: date,
             amount: amount, 
-            category: category
+            category: category,
+            name: description
         };
         api.post("/add/expense", expense)
         .then(res => { console.log(res) })
@@ -82,6 +83,16 @@ const AddExpense = ({ userEmail } : AddExpenseProps): React.ReactElement => {
                     textAlign="center"
                     >
                     <Heading as="h5" size="lg">Add Expenditure</Heading>
+                    <Divider orientation='horizontal' my={5} />
+                    <FormControl isRequired>
+                        <FormLabel as="legend" mb={4}>Expenditure Name</FormLabel>
+                        <Input
+                            focusBorderColor='red.300'
+                            placeholder='short name/description of expense'
+                            onChange={(event: any) => setDescription(event.target.value)}
+                        />
+                    </FormControl>
+                    
                     <SpendCategory onCatChange={onCategoryChange} />
                     <AmountInput onAmountChange={onAmountChange}/>
                     <SimpleGrid columns={2} spacing={4} pt={4} mb={5} 
