@@ -23,8 +23,10 @@ import api from "../utils/api";
 
 type CategorySummaryProps = { 
     userEmail: string;
+    onViewDetailedTopSpending: () => void;
 }
-const CategorySummary = ({ userEmail } : CategorySummaryProps): React.ReactElement => {
+
+const CategorySummary = ({ userEmail, onViewDetailedTopSpending} : CategorySummaryProps): React.ReactElement => {
     const [categories, setCategories] = useState([]);
     useEffect(() => {
         getTopCategories();
@@ -87,7 +89,7 @@ const CategorySummary = ({ userEmail } : CategorySummaryProps): React.ReactEleme
                 </Table>
             </TableContainer>
             <Flex direction="row" alignItems="center" mt="14"> 
-                <Button colorScheme='blue'>View Details</Button>
+                <Button onClick={() => onViewDetailedTopSpending()} colorScheme='blue'>View Details</Button>
                 <Spacer />
                 <Button colorScheme='green'>Monthly Breakdown</Button>
             </Flex>

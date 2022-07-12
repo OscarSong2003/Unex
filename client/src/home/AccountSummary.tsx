@@ -9,14 +9,15 @@ import CategorySummary from "./CategorySummary";
 type AccountSummaryProps = {
     userEmail: string,
     onAddExpense: () => void,
-    onAddIncome: () => void
+    onAddIncome: () => void,
+    onViewDetailedTopSpending: () => void
 }
-const AccountSummary = ({ userEmail, onAddExpense, onAddIncome } : AccountSummaryProps): React.ReactElement => {
+const AccountSummary = ({ userEmail, onAddExpense, onAddIncome, onViewDetailedTopSpending } : AccountSummaryProps): React.ReactElement => {
     return (
         <PageLayout>
             <NavBar />
-            <Flex w="80%%"
-                  h="600px"
+            <Flex 
+                  h="650px"
                   direction="row"
                   alignItems="top"
                   justifyContent="center"
@@ -31,7 +32,7 @@ const AccountSummary = ({ userEmail, onAddExpense, onAddIncome } : AccountSummar
                 <Spacer />
                 <SpendSummary userEmail={userEmail}/>
                 <Spacer />
-                <CategorySummary userEmail={userEmail} />
+                <CategorySummary userEmail={userEmail} onViewDetailedTopSpending={onViewDetailedTopSpending}/>
             </Flex>
         </PageLayout>
     )

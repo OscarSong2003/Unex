@@ -14,6 +14,8 @@ import api from "../utils/api";
 import { PageState } from "../types/PageState";
 import AddExpense from "../forms/AddExpense";
 import AddIncome from "../forms/AddIncome";
+import LoadingPage from "../standard/Loading";
+import TopSpendDetails from "../details/TopSpendDetails";
 
 
 const Home = (): React.ReactElement => {
@@ -37,11 +39,13 @@ const Home = (): React.ReactElement => {
     
     const onAddExpense = () => { setPageState(PageState.ADD_EXPENSE) };
     const onAddIncome = () => { setPageState(PageState.ADD_INCOME) };
-
+    const onViewDetailedTopSpending = () => { setPageState(PageState.TOP_SPEND_DETAILS) };
     if (userFetched && user && user.email) {
         switch(pageState) {
             case PageState.HOME: {
-                return (<AccountSummary userEmail={user.email} onAddExpense={onAddExpense} onAddIncome={onAddIncome} />);
+                // return (<TopSpendDetails userEmail={user.email}/>)
+                return (<AccountSummary userEmail={user.email} onAddExpense={onAddExpense} onAddIncome={onAddIncome}
+                        onViewDetailedTopSpending={onViewDetailedTopSpending} />);
             }
             case PageState.ADD_EXPENSE: {
                 return (<AddExpense userEmail={user.email} />);
@@ -49,35 +53,16 @@ const Home = (): React.ReactElement => {
             case PageState.ADD_INCOME: {
                 return (<AddIncome userEmail={user.email} />);
             }
+            case PageState.TOP_SPEND_DETAILS: {
+                return (<TopSpendDetails userEmail={user.email} />);
+            }
             default: {
                 return (<UserAlert message={"You need to be logged in to view this resource!"} isNotLoggedIn={true}/>);
             }
         }
     } else {
         return (
-            <PageLayout>
-            <Flex w="100%"
-                  h="100vh"
-                  direction="row"
-                  alignItems="center"
-                  justifyContent="center"
-                >
-                <Spinner
-                    thickness='4px'
-                    speed='0.65s'
-                    emptyColor='gray.200'
-                    color='blue.500'
-                    size='xl'
-                    mr={4}
-                />
-                <Image 
-                    width={850}
-                    src="/images/loadingProf.png"
-                    alt="loading profile"
-                    mb={8}
-                />
-                </Flex>
-            </PageLayout>
+            <LoadingPage />
         );
     }
     // fetch current user's data from API
