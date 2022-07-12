@@ -16,11 +16,13 @@ const SpendCategory = ({ onCatChange } : SpendCategoryProps): React.ReactElement
         <FormControl isRequired my={4}>
                         <FormLabel as="legend" mb={4}>Spending Category</FormLabel>
                         <RadioGroup onChange={(val: string) => onCatChange(val)}>
-                            <HStack spacing="30px">
+                            <HStack spacing="40px" mb={4}>
                                 <Radio value="tuition">Tuition</Radio>
                                 <Radio value="grocery">Grocery</Radio>
                                 <Radio value="food">Food/Snacks</Radio>
                                 <Radio value="tech">Tech</Radio> 
+                            </HStack>
+                            <HStack spacing="40px">
                                 <Radio value="fun">Entertainment</Radio>
                                 <Radio value="other">Other</Radio>
                             </HStack>

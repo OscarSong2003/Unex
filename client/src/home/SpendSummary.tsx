@@ -60,7 +60,7 @@ const SpendSummary = ({ userEmail }: SpendSummaryProp): React.ReactElement => {
                 </Heading>
                 <Text pt={3} fontSize="xl">Amount Available: ${
                 (!isInDeficit) ? amountAvailable.toFixed(2) : 0}</Text>
-                <Text py={2} fontSize="xl">Amount Spent: ${amountSpent ? amountSpent.toFixed(2) : 0}</Text>
+                <Text py={2} fontSize="xl">Amount Spent: ${amountSpent ? amountSpent.toFixed(2) : "0.00"}</Text>
                 {isInDeficit && <Text py={2} fontSize="xl" color="red.600">Net Deficit: ${(deficit).toFixed(2) }</Text>}
             </Box>
             <Box

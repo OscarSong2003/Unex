@@ -30,11 +30,13 @@ import {
         <FormControl isRequired my={4}>
                         <FormLabel as="legend" mb={4}>Income/Earning Category</FormLabel>
                         <RadioGroup onChange={(val: string) => onIncChange(val)}>
-                            <HStack spacing="30px">
+                            <HStack spacing="40px" mb={4}>
                                 <Radio value="family">Family</Radio>
                                 <Radio value="job">Job</Radio>
                                 <Radio value="friend">Friends</Radio>
                                 <Radio value="scholarship">Loans/Scholarships</Radio> 
+                            </HStack>
+                            <HStack spacing="40px">
                                 <Radio value="other">Other</Radio>
                             </HStack>
                         </RadioGroup>

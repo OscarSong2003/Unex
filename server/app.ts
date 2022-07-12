@@ -20,6 +20,7 @@ const { MongoClient, ServerApiVersion } = require('mongodb');
 const uri = "mongodb+srv://user1:user1@unex.dbjmtzd.mongodb.net/?retryWrites=true&w=majority";
 const userRoute = require('./routes/users');
 const addRoute = require('./routes/add');
+const expenditureRoute = require('./routes/expenditure')
 
 const start = async () => {
   try {
@@ -43,6 +44,7 @@ const start = async () => {
   // routes
   app.use('/user', userRoute);
   app.use('/add', addRoute);
+  app.use('/exp', expenditureRoute);
 
   app.get('/', (req: Request, res: Response, next: NextFunction) => {
     res.send('Hello World!'); 
