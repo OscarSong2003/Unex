@@ -1,8 +1,9 @@
 import React from 'react';
 import PageLayout from './PageLayout';
 import NavBar from './NavBar';
-import { Center, Heading, Flex, Image, Button, HStack } from '@chakra-ui/react';
+import { Center, Heading, Flex, Image, Button, HStack, Link } from '@chakra-ui/react';
 import LoginButton from './Login';
+
 
 const Lobby = (): React.ReactElement => { 
     return (
@@ -27,9 +28,11 @@ const Lobby = (): React.ReactElement => {
                 </Flex> */}
                 <HStack alignItems="center" justifyContent="center" spacing={8}>
                     <LoginButton />
-                    <Button rounded="full" colorScheme="facebook">
-                        Learn More About Unex
-                    </Button>
+                    <Link href="/about">
+                        <Button rounded="full" colorScheme="facebook">
+                            Learn More About Unex
+                        </Button>
+                    </Link>
                 </HStack>
 
 

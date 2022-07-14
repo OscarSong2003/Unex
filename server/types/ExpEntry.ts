@@ -7,4 +7,5 @@ export type ExpEntryDTO = {
     category: ExpenditureCategories,
     amount: number,
     date: Date,
+    userId: ObjectId,
 }

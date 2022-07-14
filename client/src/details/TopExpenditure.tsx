@@ -17,9 +17,10 @@ import { CategoryInfo, EntryInfo } from "./TopSpendDetails";
 type TopExpenditureProps = { 
     categoryInfo: CategoryInfo,
     catEntries: EntryInfo[],
+    left: boolean
 }
 
-const TopExpenditure = ({categoryInfo, catEntries} : TopExpenditureProps): React.ReactElement => {
+const TopExpenditure = ({categoryInfo, catEntries, left} : TopExpenditureProps): React.ReactElement => {
     const [ currentDate, setCurrentDate] = useState(new Date());
     return (
         <Box
@@ -30,9 +31,10 @@ const TopExpenditure = ({categoryInfo, catEntries} : TopExpenditureProps): React
                         textAlign="center"
                         px={2}
                         py={7}
-                        mr="100px"
-                        ml={8}
+                        mr={left ? "150px" : "0px"}
                         height="80%"
+                        width="600px"
+                    
                         >
                         <Heading as="h3" size="md" mb={4}> 
                             Top {categoryInfo.category} Expenditures

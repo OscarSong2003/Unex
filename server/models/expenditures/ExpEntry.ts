@@ -12,7 +12,8 @@ const ExpenditureEntrySchema = new Schema<ExpEntryDTO>({
         required: true
     },
     amount: {type: Number, required: true, default: 0},
-    date: {type: Date, required: false}
+    date: {type: Date, required: false},
+    userId: {type: Schema.Types.ObjectId, ref: "User"}
 });
 
 export const ExpenditureEntry = db.model<ExpEntryDTO>("ExpenditureEntry", ExpenditureEntrySchema);

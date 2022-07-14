@@ -27,5 +27,5 @@ export type UserDTO = {
     jobInc: JobIncDTO,
     friendInc: FriendIncDTO,
     scholarshipInc: ScholarshipIncDTO,
-    otherInc: OtherIncDTO
+    otherInc: OtherIncDTO,
 }

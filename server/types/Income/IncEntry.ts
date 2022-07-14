@@ -1,4 +1,4 @@
-import { Schema } from "mongoose"
+import { ObjectId, Schema } from "mongoose"
 import { IncomeCategories } from "./enums"
 
 export type IncEntryDTO = {
@@ -7,4 +7,5 @@ export type IncEntryDTO = {
     category: IncomeCategories,
     amount: number,
     date: Date,
+    userId: ObjectId
 }

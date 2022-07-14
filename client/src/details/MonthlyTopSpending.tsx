@@ -21,7 +21,7 @@ import {
 import NavBar from "../standard/NavBar";
 import TopExpenditure from "./TopExpenditure";
 
-type TopSpendDetailsProps = {
+type TopMonthlySpendDetailsProps = {
     userEmail: string,
 }
 
@@ -36,7 +36,7 @@ export type EntryInfo = {
     name: string,
 }
 
-const TopSpendDetails = ({ userEmail } : TopSpendDetailsProps): React.ReactElement => {
+const TopMonthlySpendDetails = ({ userEmail } : TopMonthlySpendDetailsProps): React.ReactElement => {
     const [ topSpendCat, setTopSpendCat ] = useState<CategoryInfo[]>([]);
     const [ cat1Entries, setCat1Entries ] = useState<EntryInfo[]>([]);
     const [ cat2Entries, setCat2Entries ] = useState<EntryInfo[]>([]);
@@ -50,7 +50,7 @@ const TopSpendDetails = ({ userEmail } : TopSpendDetailsProps): React.ReactEleme
     }, []);
 
     useEffect(() => {
-        getExpensesByCategory();
+        getMonthlyExpensesByCategory();
     }, [topSpendCat]);
 
     const getTopCategories = async () => {
@@ -72,10 +72,10 @@ const TopSpendDetails = ({ userEmail } : TopSpendDetailsProps): React.ReactEleme
         } 
     }
 
-    const getExpensesByCategory = async () => {
+    const getMonthlyExpensesByCategory = async () => {
         let entries: any[] = [];
         for (let catInfo of topSpendCat) {
-            await api.get('/exp/byCategory',  {params: { email: userEmail, category: catInfo.category }})
+            await api.get('/monthly/topExp',  {params: { email: userEmail, category: catInfo.category }})
             .then((res:any) => {
                 const body = res.data; 
                 // console.log('data back' ,body);
@@ -141,4 +141,4 @@ const TopSpendDetails = ({ userEmail } : TopSpendDetailsProps): React.ReactEleme
 
 }
 
-export default TopSpendDetails;
+export default TopMonthlySpendDetails;

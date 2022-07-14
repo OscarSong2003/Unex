@@ -24,9 +24,10 @@ import api from "../utils/api";
 type CategorySummaryProps = { 
     userEmail: string;
     onViewDetailedTopSpending: () => void;
+    onViewMonthlyTopSpendingBreakdown: () => void;
 }
 
-const CategorySummary = ({ userEmail, onViewDetailedTopSpending} : CategorySummaryProps): React.ReactElement => {
+const CategorySummary = ({ userEmail, onViewDetailedTopSpending, onViewMonthlyTopSpendingBreakdown} : CategorySummaryProps): React.ReactElement => {
     const [categories, setCategories] = useState([]);
     useEffect(() => {
         getTopCategories();
@@ -53,8 +54,8 @@ const CategorySummary = ({ userEmail, onViewDetailedTopSpending} : CategorySumma
             textAlign="center"
             px={5}
             py={7}
-            mr="150px"
-            ml={8}
+            mr="70px"
+            ml="30px"
             height="80%"
             >
             <Heading as="h3" size="md" mb={4}> 
@@ -79,19 +80,12 @@ const CategorySummary = ({ userEmail, onViewDetailedTopSpending} : CategorySumma
                             </Tr>
                         ))}
                     </Tbody>
-                    {/* <Tfoot>
-                    <Tr>
-                        <Th>To convert</Th>
-                        <Th>into</Th>
-                        <Th isNumeric>multiply by</Th>
-                    </Tr>
-                    </Tfoot> */}
                 </Table>
             </TableContainer>
-            <Flex direction="row" alignItems="center" mt="14"> 
+            <Flex direction="row" alignItems="center" mt="8px"> 
                 <Button onClick={() => onViewDetailedTopSpending()} colorScheme='blue'>View Details</Button>
                 <Spacer />
-                <Button colorScheme='green'>Monthly Breakdown</Button>
+                <Button colorScheme='green' onClick={() => onViewMonthlyTopSpendingBreakdown()}>Monthly Breakdown</Button>
             </Flex>
         </Box>
     )

@@ -82,7 +82,7 @@ const AddIncome = ({ userEmail } : AddIncomeProps): React.ReactElement => {
                   direction="column"
                   alignItems="center"
                   justifyContent="top"
-                  mt="200px"
+                  mt="100px"
                 >
                  <Box
                     px={8}

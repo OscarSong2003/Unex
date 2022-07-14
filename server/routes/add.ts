@@ -16,12 +16,22 @@ import { JobIncome } from "../models/incomes/Job";
 import { FriendIncome } from "../models/incomes/Friend";
 import { ScholarshipIncome } from "../models/incomes/Scholarship";
 import { OtherIncome } from "../models/incomes/Other";
+import { ObjectId } from "mongoose";
 
 const router = express.Router();
 
 router.post('/income', async function(req: Request, res: Response, next: NextFunction) {
     const { email, date, amount, category, name } = req.body;
-    const entry = new IncomeEntry({_id: new mongoose.Types.ObjectId(), name: name, category: category, amount: amount, date: date});
+   
+    let userId; 
+    const user = await User.findOne({email: email});
+    if (!user) {
+        res.send('user not found')
+    } else {
+        userId = user._id;
+    } 
+    
+    const entry = new IncomeEntry({_id: new mongoose.Types.ObjectId(), name: name, category: category, amount: amount, date: date, userId: userId});
     await entry.save((err: any, createdEntry) => {
         console.log('email', email);
         console.log('date', date);
@@ -78,7 +88,16 @@ router.post('/income', async function(req: Request, res: Response, next: NextFun
 
 router.post('/expense', async function(req: Request, res: Response, next: NextFunction) { 
     const { email, date, amount, category, name} = req.body;
-    const entry = new ExpenditureEntry({_id: new mongoose.Types.ObjectId(), name: name, category: category, amount: amount, date: date});
+    
+    let userId; 
+    const user = await User.findOne({email: email});
+    if (!user) {
+        res.send('user not found')
+    } else {
+        userId = user._id;
+    } 
+
+    const entry = new ExpenditureEntry({_id: new mongoose.Types.ObjectId(), name: name, category: category, amount: amount, date: date, userId: userId});
     await entry.save((err: any, createdEntry) => {
         // find current user  
         console.log('email', email);
@@ -91,7 +110,7 @@ router.post('/expense', async function(req: Request, res: Response, next: NextFu
         switch (category) {
             case "tuition": {
                 // find user's tuition expenditure's id 
-                User.findOne({ email: email }, 'tuitionExp', (err: any, user: any) => {
+                User.findOne({ email: email}, 'tuitionExp', (err: any, user: any) => {
                      // add createdEntry's id to array of tuition expenditure ids of current user
                      TuitionExpenditure.findByIdAndUpdate(user.tuitionExp._id, { $push: { tuitionEntries: createdEntry._id }, $inc: {total: amount} }, 
                         { new: true }).then((exp: any) => {console.log("success")}).catch((err: any) => { console.log(err); });
