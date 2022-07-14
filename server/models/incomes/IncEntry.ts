@@ -12,7 +12,8 @@ const IncomeEntrySchema = new Schema<IncEntryDTO>({
         required: true 
     },
     amount: {type: Number, required: true},
-    date: {type: Date, required: false}
+    date: {type: Date, required: false},
+    userId: {type: Schema.Types.ObjectId, ref: "User"}
 });
 
 export const IncomeEntry = db.model<IncEntryDTO>("IncomeEntry", IncomeEntrySchema);

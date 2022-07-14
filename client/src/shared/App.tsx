@@ -8,6 +8,7 @@ import Fonts from '../Fonts'
 import Lobby from "../standard/Lobby";
 import AddExpense from "../forms/AddExpense";
 import AddIncome from "../forms/AddIncome";
+import About from "../standard/About";
 
 const App = (): React.ReactElement => {
   return (
@@ -17,6 +18,7 @@ const App = (): React.ReactElement => {
           <Routes>
             <Route path="/" element={<Lobby />} />
             <Route path="/home" element={<Home />} />
+            <Route path="/about" element={<About />} />
             {/* <Route path="/addExp" element={<AddExpense />} /> */}
             {/* <Route path="/addInc" element={<AddIncome />} /> */}
             {/* <Route path="/draw" element={<Drawpad />} />

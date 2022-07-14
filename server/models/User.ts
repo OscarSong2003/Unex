@@ -19,7 +19,7 @@ const UserSchema = new Schema<UserDTO>({
     jobInc: {type: Schema.Types.ObjectId, ref: "JobIncome"},
     friendInc: {type: Schema.Types.ObjectId, ref: "FriendIncome"},
     scholarshipInc: {type: Schema.Types.ObjectId, ref: "ScholarshipIncome"},
-    otherInc: {type: Schema.Types.ObjectId, ref: "OtherIncome"}
+    otherInc: {type: Schema.Types.ObjectId, ref: "OtherIncome"},
 });
 
 export const User = db.model<UserDTO>("User", UserSchema);

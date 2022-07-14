@@ -21,6 +21,7 @@ const uri = "mongodb+srv://user1:user1@unex.dbjmtzd.mongodb.net/?retryWrites=tru
 const userRoute = require('./routes/users');
 const addRoute = require('./routes/add');
 const expenditureRoute = require('./routes/expenditure')
+const monthlyRoute = require('./routes/monthly');
 
 const start = async () => {
   try {
@@ -45,6 +46,7 @@ const start = async () => {
   app.use('/user', userRoute);
   app.use('/add', addRoute);
   app.use('/exp', expenditureRoute);
+  app.use('/monthly', monthlyRoute);
 
   app.get('/', (req: Request, res: Response, next: NextFunction) => {
     res.send('Hello World!'); 

@@ -3,11 +3,12 @@ import { Box, Heading, VStack, Button, Spacer, Link } from "@chakra-ui/react";
 import LogoutButton from '../standard/Logout';
 
 type ActionCenterProps = {
-    onAddExpense: () => void;
-    onAddIncome: () => void;
+    onAddExpense: () => void,
+    onAddIncome: () => void,
+    onViewMonthlySummary: () => void
 }
 
-const ActionCenter = ({ onAddExpense, onAddIncome }: ActionCenterProps): React.ReactElement => {
+const ActionCenter = ({ onAddExpense, onAddIncome, onViewMonthlySummary }: ActionCenterProps): React.ReactElement => {
     return (
         <Box bg="gray.100"
             borderColor="gray.100"
@@ -16,8 +17,9 @@ const ActionCenter = ({ onAddExpense, onAddIncome }: ActionCenterProps): React.R
             textAlign="center"
             py={7}
             px={5}
-            ml="150px"
-            height="56%"
+            ml="120px"
+            mr="70px"
+            height="57%"
         >
             <Heading as="h3" size="md">Action Center</Heading>
             <VStack mt={6}>
@@ -25,7 +27,7 @@ const ActionCenter = ({ onAddExpense, onAddIncome }: ActionCenterProps): React.R
                 <Spacer />
                 <Button mx={5} onClick={() => onAddIncome()} colorScheme="green">Add Earning/Income</Button>
                 <Spacer />
-                <Button mx={5} colorScheme="facebook">View Monthly Summary</Button>
+                <Button mx={5} onClick={() => onViewMonthlySummary()} colorScheme="facebook">View Monthly Summary</Button>
                 <Spacer />
                 <LogoutButton />
             </VStack>
