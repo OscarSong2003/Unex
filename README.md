@@ -8,8 +8,7 @@ up to date information.
 
 Users will need to sign in/sign up to access their information. 
 
-The project is built using MongoDB, Express, React, Express, and TypeScript. Additional tools such as Axios, and libraries for better
-visualizations (react-simple-charts for example) are employed.
+The project is built using MongoDB, Express, React, Express, and TypeScript. Additional tools such as Mongoose and Axios, and libraries for better visualizations (react-simple-charts for example) are employed.
 
 The database is hosted on MongoAtlas. 
 
