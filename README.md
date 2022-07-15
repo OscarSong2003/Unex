@@ -17,3 +17,5 @@ The Client Folder contains all front-end components, whereas the Server Folder c
 Running npm run start will launch client, and npm run dev will launch server. To actually use it more freely it is recommended to use 
 your own MongoAtlas account as the account used in my case is my own and is restricted. 
 
+SERVER_URL=http://localhost:9000/
+CLIENT_URL=http://localhost:3000/
