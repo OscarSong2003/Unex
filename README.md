@@ -1,7 +1,7 @@
 # Unex
 
 Quick Video Demo: https://www.youtube.com/watch?v=JEENmXVHiu4 
-        fallback: https://drive.google.com/file/d/10Fl11c6pDQZw162YJdblEz7Scze4_7G1/view?usp=sharing 
+      - fallback: https://drive.google.com/file/d/10Fl11c6pDQZw162YJdblEz7Scze4_7G1/view?usp=sharing 
 
 Unex is a student financial planner that enables easy and simple management of income and expenses. Users can visualize their monthly 
 spending and income, along with summaries of top categories. They can also easily add, remove, and update individual expenditures to keep 
