@@ -74,10 +74,7 @@ const SpendSummary = ({ userEmail }: SpendSummaryProp): React.ReactElement => {
                 // borderWidth="2px"
                 // bg="gray.100"
             >
-                <PieChart 
-                    // animate={true}
-                    // animationDuration={500}
-                    // animationEasing="ease-out"
+                <PieChart
                     label={({dataEntry}) => {   
                         return (amountAvailable != 0 || amountSpent != 0) ? dataEntry.title: '';
                     }}
@@ -98,8 +95,8 @@ const SpendSummary = ({ userEmail }: SpendSummaryProp): React.ReactElement => {
                         }
                     }
                     data={[
-                        { title: (isInDeficit || (amountSpent == 0 && amountAvailable == 0))? ' ' : 'Available', value: isInDeficit ? 0 : amountAvailable, color: '#5de362' },
-                        { title: isInDeficit ? 'Deficit' : ((amountSpent == 0 && amountAvailable == 0) ? ' ' :'Spent'), value: amountSpent, color: '#f0b207' },
+                        { title: (isInDeficit || (amountSpent == 0 && amountAvailable == 0))? ' ' : 'Available', value: isInDeficit ? 0 : amountAvailable, color: '#37A169' },
+                        { title: isInDeficit ? 'Deficit' : ((amountSpent == 0 && amountAvailable == 0) ? ' ' :'Spent'), value: amountSpent, color: '#8DC8EB' },
                     ]}
                     />
             </Box>

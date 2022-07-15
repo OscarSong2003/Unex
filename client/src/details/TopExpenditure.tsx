@@ -32,7 +32,7 @@ const TopExpenditure = ({categoryInfo, catEntries, left} : TopExpenditureProps):
                         px={2}
                         py={7}
                         mr={left ? "150px" : "0px"}
-                        height="80%"
+                        height="90%"
                         width="600px"
                     
                         >

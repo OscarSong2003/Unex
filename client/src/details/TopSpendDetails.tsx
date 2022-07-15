@@ -20,6 +20,7 @@ import {
 } from "@chakra-ui/react";
 import NavBar from "../standard/NavBar";
 import TopExpenditure from "./TopExpenditure";
+import Footer from "../standard/Footer";
 
 type TopSpendDetailsProps = {
     userEmail: string,
@@ -107,10 +108,10 @@ const TopSpendDetails = ({ userEmail } : TopSpendDetailsProps): React.ReactEleme
                   direction="row"
                   alignItems="top"
                   justifyContent="center"
-                  mt="100px"
+                  mt="30px"
                   bg="gray.300"
                   borderColor="gray.100"
-                  pt="70px"
+                  pt="40px"
                   ml="20px"
                   mr="30px"
                   >
@@ -122,15 +123,16 @@ const TopSpendDetails = ({ userEmail } : TopSpendDetailsProps): React.ReactEleme
                   direction="row"
                   alignItems="top"
                   justifyContent="center"
-                  mt="70px"
+                  mt="30px"
                   bg="gray.300"
                   borderColor="gray.100"
-                  pt="50px"
+                  pt="40px"
                   ml="20px"
                   mr="30px">
                     <TopExpenditure left={true} categoryInfo={topSpendCat[2]} catEntries={cat3Entries} />
                     <TopExpenditure left={false} categoryInfo={topSpendCat[3]} catEntries={cat4Entries} />
                   </Flex>
+            <Footer marginTop="20px"/>
             </PageLayout>
         )
     } else {

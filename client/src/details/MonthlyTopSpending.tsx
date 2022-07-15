@@ -20,6 +20,7 @@ import {
 } from "@chakra-ui/react";
 import NavBar from "../standard/NavBar";
 import TopExpenditure from "./TopExpenditure";
+import Footer from "../standard/Footer";
 
 type TopMonthlySpendDetailsProps = {
     userEmail: string,
@@ -107,10 +108,10 @@ const TopMonthlySpendDetails = ({ userEmail } : TopMonthlySpendDetailsProps): Re
                   direction="row"
                   alignItems="top"
                   justifyContent="center"
-                  mt="100px"
+                  mt="30px"
                   bg="gray.300"
                   borderColor="gray.100"
-                  pt="70px"
+                  pt="50px"
                   ml="20px"
                   mr="30px"
                   >
@@ -122,7 +123,7 @@ const TopMonthlySpendDetails = ({ userEmail } : TopMonthlySpendDetailsProps): Re
                   direction="row"
                   alignItems="top"
                   justifyContent="center"
-                  mt="70px"
+                  mt="30px"
                   bg="gray.300"
                   borderColor="gray.100"
                   pt="50px"
@@ -131,6 +132,7 @@ const TopMonthlySpendDetails = ({ userEmail } : TopMonthlySpendDetailsProps): Re
                     <TopExpenditure left={true} categoryInfo={topSpendCat[2]} catEntries={cat3Entries} />
                     <TopExpenditure left={false} categoryInfo={topSpendCat[3]} catEntries={cat4Entries} />
                   </Flex>
+            <Footer marginTop="30px"/>
             </PageLayout>
         )
     } else {

@@ -95,7 +95,7 @@ const AccountSummary = ({ userEmail, onAddExpense, onAddIncome, onViewDetailedTo
 
             </Flex>
             <Flex 
-                  h="560px"
+                  h="600px"
                   direction="row"
                   alignItems="top"
                   justifyContent="center"
@@ -113,7 +113,7 @@ const AccountSummary = ({ userEmail, onAddExpense, onAddIncome, onViewDetailedTo
                 <CategorySummary userEmail={userEmail} onViewDetailedTopSpending={onViewDetailedTopSpending} 
                                  onViewMonthlyTopSpendingBreakdown={onViewMonthlyTopSpendingBreakdown}/>
             </Flex>
-            <Footer marginTop={"60px"}/>
+            <Footer marginTop={"30px"}/>
         </PageLayout>
     )
 }

@@ -75,8 +75,8 @@ const MonthlyOverview = ({ userEmail } : MonthlyOverviewProps): React.ReactEleme
                         }
                     }
                     data={[
-                        { title: 'Spending', value: totalSpending, color: '#80CD91' },
-                        { title: 'Income', value: totalIncome, color: '#F3C18C' },
+                        { title: totalSpending == 0 ? ' ' : 'Spending', value: totalSpending, color: '#80CD91' },
+                        { title: totalIncome == 0 ? ' ' : 'Income', value: totalIncome, color: '#F3C18C' },
                     ]}
                     />
             </Box>
