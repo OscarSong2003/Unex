@@ -6,7 +6,7 @@ Unex is a student financial planner that enables easy and simple management of i
 spending and income, along with summaries of top categories. They can also easily add, remove, and update individual expenditures to keep 
 up to date information. 
 
-Users will need to sign in to access their information. 
+Users will need to sign in/sign up to access their information. 
 
 The project is built using MongoDB, Express, React, Express, and TypeScript. Additional tools such as Axios, and libraries for better
 visualizations (react-simple-charts for example) are employed.
