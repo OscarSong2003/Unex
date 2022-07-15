@@ -36,7 +36,7 @@ const MonthlySummary = ( { userEmail, onReturnHome, onViewExpCat, onViewIncCat }
                 
                 <IncomeCenter onViewIncCat={onViewIncCat}/>
             </Flex>
-            <Footer marginTop={"90px"}/>
+            <Footer marginTop={"40px"}/>
 
         </PageLayout>
     )

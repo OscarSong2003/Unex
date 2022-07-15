@@ -17,7 +17,7 @@ const LoadingPage = (): React.ReactElement => {
                     emptyColor='gray.200'
                     color='blue.500'
                     size='xl'
-                    mr={4}
+                    mr="60px"
                 />
                 <Image 
                     width={850}

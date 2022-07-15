@@ -19,13 +19,14 @@ const ActionCenter = ({ onAddExpense, onAddIncome, onViewMonthlySummary }: Actio
             px={5}
             ml="120px"
             mr="70px"
-            height="57%"
+            height="310px"
+            width="67%"
         >
             <Heading as="h3" size="md">Action Center</Heading>
             <VStack mt={6}>
-                <Button onClick={() => onAddExpense()} py={5} colorScheme="red">Add Expense</Button>
+                <Button onClick={() => onAddExpense()} py={5} colorScheme="red">Manage Expense</Button>
                 <Spacer />
-                <Button mx={5} onClick={() => onAddIncome()} colorScheme="green">Add Earning/Income</Button>
+                <Button mx={5} onClick={() => onAddIncome()} colorScheme="green">Manage Earning/Income</Button>
                 <Spacer />
                 <Button mx={5} onClick={() => onViewMonthlySummary()} colorScheme="facebook">View Monthly Summary</Button>
                 <Spacer />

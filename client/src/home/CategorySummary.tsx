@@ -56,7 +56,7 @@ const CategorySummary = ({ userEmail, onViewDetailedTopSpending, onViewMonthlyTo
             py={7}
             mr="70px"
             ml="30px"
-            height="80%"
+            height="395px"
             >
             <Heading as="h3" size="md" mb={4}> 
                 Top Spend Categories

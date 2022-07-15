@@ -17,6 +17,7 @@ import {
     Button,
     Spacer } from "@chakra-ui/react";
 import api from "../../utils/api";
+import Footer from "../../standard/Footer";
 
 type IndividualExpenditureProps = { 
     userEmail: string,
@@ -54,7 +55,7 @@ const IndividualExpenditure = ({ userEmail, category, onReturnHome, onBackToMont
                   direction="row"
                   alignItems="top"
                   justifyContent="center"
-                  mt="150px"
+                  mt="40px"
                   bg="gray.300"
                   borderColor="gray.100"
                   pt="50px"
@@ -69,8 +70,8 @@ const IndividualExpenditure = ({ userEmail, category, onReturnHome, onBackToMont
                     textAlign="center"
                     px={5}
                     py={7}
-                    
-                    height="80%"
+                    overflow={"auto"}
+                    height="90%"
                     width="800px"
                     >
                     <Heading as="h3" size="md" mb={4}> 
@@ -105,8 +106,7 @@ const IndividualExpenditure = ({ userEmail, category, onReturnHome, onBackToMont
                     </Flex>
                 </Box>
             </Flex>
-
-
+            <Footer marginTop="40px"/>
         </PageLayout>
     )
     

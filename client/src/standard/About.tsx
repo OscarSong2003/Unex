@@ -4,6 +4,7 @@ import PageLayout from "./PageLayout";
 import { Center, Box } from "@chakra-ui/react"; 
 import TypeAnimation from "react-type-animation";
 import "./about.css";
+import Footer from "./Footer";
 
 const About = (): React.ReactElement => {
     return (
@@ -14,14 +15,14 @@ const About = (): React.ReactElement => {
                     <TypeAnimation
                         cursor={true}
                         sequence={[
-                        'Unex is a financial tracker for students. You can use it to manage your incomes and expenses. Whether you want to organize your monthly expenses or visualize your financial status, Unex is the right tool for you!',
+                        'Unex is a financial tracker for students. You can use it to manage your incomes and expenses. Whether you want to organize your monthly expenses or visualize your financial status, Unex is the perfect tool for you!',
                         ]}
                         repeat={5}
                         className="text-animation"
                     />
                 </Box>
             </Center>
-
+        <Footer marginTop="90px" />
 
         </PageLayout>
     )
